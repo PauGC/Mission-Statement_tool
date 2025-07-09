@@ -6,6 +6,5 @@ Pillow
 pycountry
 pymupdf
 python-docx
-opencv-python-headless
 streamlit
 torch
