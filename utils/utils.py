@@ -22,7 +22,7 @@ import torch
 
 # avoid RunTime error raised by torch
 # RuntimeError: Tried to instantiate class '__path__._path', but it does not exist! Ensure that it is registered via torch::class_
-# torch.classes.__path__ = []
+torch.classes.__path__ = []
 
 BILLABLE_TRANSPORT = ["Own car", "Rental car", "Bus", "Metro", "Taxi", "Train", "Plane", "Ship"]
 
@@ -294,7 +294,7 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
     if attachment.type == "application/pdf":
         ocr_oks, attachments_new, im_size_cms, confidence_avgs = process_attachment_pdf(amount=amount, file=attachment)
     elif attachment.type.startswith("image"):
-        reader = easyocr.Reader(['en', 'es', 'fr', 'it', 'de'])  #, gpu=False)
+        reader = easyocr.Reader(['en', 'es', 'fr', 'it', 'de'], gpu=False)
         try:
             attachment_text = reader.readtext(attachment.read())
         except Exception as err:
