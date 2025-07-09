@@ -3,7 +3,6 @@ import os
 # OMP: Error #15: Initializing libiomp5md.dll, but found libiomp5md.dll already initialized.
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 from copy import deepcopy
-import easyocr
 import numpy as np
 import pandas as pd
 import streamlit as st
