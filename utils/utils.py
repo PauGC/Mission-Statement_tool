@@ -359,6 +359,7 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
 # ================================================================================================
 # NOT USED =======================================================================================
 # ================================================================================================
+"""
 def process_boardingpass(file: io.BytesIO):
     filename = "./resources/1721312743577.jpg"
     # filename = "./resources/BCN-FRA.PNG"
@@ -423,3 +424,4 @@ def is_square(contour: np.ndarray, rel_error: float = 0.05) -> bool:
 
 def contour_center(contour: np.ndarray) -> np.ndarray:
     return np.mean([point[0][0] for point in contour]), np.mean([point[0][1] for point in contour])
+"""
