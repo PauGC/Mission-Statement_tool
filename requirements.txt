@@ -1,0 +1,11 @@
+babel
+easyocr
+numpy
+pandas
+Pillow
+pycountry
+pymupdf
+python-docx
+opencv-python
+streamlit
+torch

@@ -1,0 +1,13 @@
+# VSC and Pycharm folders
+.vscode
+.idea
+
+# Compiled files and folders
+__pycache__
+*.so
+*.pyc
+/build
+venv
+
+# file resources used for development
+/resources
