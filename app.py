@@ -294,10 +294,11 @@ if __name__ == '__main__':
                             if currency == "JPY":
                                 exchange_rate = st.number_input("Exchange rage {} -> EUR:".format(currency), format="%0.6f", key="exchange_rate")
                             elif currency == "CHF":
-                                exchange_rate = st.number_input("Exchange rage {} -> EUR:".format(currency), format="%0.4f", key="exchange_rate")
+                                exchange_rate = st.number_input("Exchange rage {} -> EUR:".format(currency), format="%0.5f", key="exchange_rate")
                             else:
                                 exchange_rate = st.number_input("Exchange rage {} -> EUR:".format(currency), key="exchange_rate")
-                            st.write("[ECB data](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-{}.en.html) (Watch out, choose proper conversion!!!)".format(currency.lower()))
+                            st.write("[ECB data](https://commission.europa.eu/funding-tenders/procedures-guidelines-tenders/information-contractors-and-beneficiaries/exchange-rate-inforeuro_en) (Watch out, choose proper conversion!!!)".format(currency.lower()))
+                            # old page used: https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-{}.en.html
                 with cols_new_exp[4]:
                     if category == "Flights":
                         invoice = st.file_uploader("Invoice", accept_multiple_files=False, type=["pdf", "png", "jpg", "jpeg", "jfif", "tiff"], key=st.session_state["file_uploader_key_1"])
