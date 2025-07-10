@@ -43,7 +43,6 @@ def update_summary_table():
     st.session_state.expense_summary.at[3, "Amount"] = st.session_state.expense_summary.loc[:2]["Amount"].sum()
 
 
-
 def add_expense(category: str, description: str, amount: float, currency: str, attachment: io.BytesIO | dict, exchange_rate: float = 1.0):
     # Check expense parameters provided
     if amount == 0.0:

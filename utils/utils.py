@@ -294,7 +294,10 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
     if attachment.type == "application/pdf":
         ocr_oks, attachments_new, im_size_cms, confidence_avgs = process_attachment_pdf(amount=amount, file=attachment)
     elif attachment.type.startswith("image"):
-        reader = easyocr.Reader(['en', 'es', 'fr', 'it', 'de'], gpu=False)
+        try:
+            reader = easyocr.Reader(['en', 'es', 'fr', 'it', 'de'], gpu=False)
+        except Exception as err:
+            raise err
         try:
             attachment_text = reader.readtext(attachment.read())
         except Exception as err:
