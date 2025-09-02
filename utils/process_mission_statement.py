@@ -1,8 +1,8 @@
 from copy import deepcopy
 from datetime import date
-from python-docx import Document
-from python-docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
-from python-docx.shared import Pt, RGBColor, Cm
+from docx import Document
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
+from docx.shared import Pt, RGBColor, Cm
 import io
 import pandas as pd
 from pathlib import Path
