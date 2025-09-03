@@ -20,14 +20,19 @@ To create .yml file: conda env export > environment.yml
         * pymupdf cannot be installed wihtout conflicting with easyocr
         * easyocr installed version by default 7.1.0, which has problems with Pillow ANTIALIAS
 
-3) missionstatement_py313 (python 3.13.5):
+3) missionstatement_py312 (python 3.12.11):
     * conda env with only pip installation:
         * locally:
-            * app crashed when processing receipt images (easyocr, Pillow?!?!?!)
+            * app crashes when processing receipt images (easyocr, Pillow?!?!?!)
             * processing of receipts in pdf works fine
         * cloud:
             * does not find python-docx...
 
-4) missionstatement_py312 (python 3.12.11):
+4) missionstatement_py313 (python 3.13.5):
     * conda env with only pip installation:
-        
+        * locally:
+            * app crashes when processing receipt images (easyocr, Pillow?!?!?!)
+            * processing of receipts in pdf works fine
+        * cloud:
+            * does not find python-docx...
+
