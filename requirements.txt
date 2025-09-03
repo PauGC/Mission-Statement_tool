@@ -1,6 +1,6 @@
 python-docx
-babel
 easyocr
+babel
 numpy
 pandas
 Pillow

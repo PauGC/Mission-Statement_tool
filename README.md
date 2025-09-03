@@ -16,7 +16,9 @@ To create .yml file: conda env export > environment.yml
             - in utils\utils.py: torch.classes.__path__ = []
         * cloud:
             - environment.yml: when deploying it does not find python-docx
-            
+            - requirements.txt: 
+                - when placing python-docx first, no problems with python-docx
+                - app crashes when loading easyocr model (easyocr.reader)
 
 2) missionstatement_py311 (python 3.11.13): 
     * pure conda installation: I don't manage to complete the creation of the environment
