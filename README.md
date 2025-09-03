@@ -15,7 +15,8 @@ To create .yml file: conda env export > environment.yml
             - in app.py, utils\utils.py: os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
             - in utils\utils.py: torch.classes.__path__ = []
         * cloud:
-            - when deploying it does not find python-docx
+            - environment.yml: when deploying it does not find python-docx
+            
 
 2) missionstatement_py311 (python 3.11.13): 
     * pure conda installation: I don't manage to complete the creation of the environment
