@@ -10,12 +10,12 @@ Coming soon...
 To create .yml file: conda env export > environment.yml
 
 To create venv:
-* from inside conda missionstatement run:
     * python -m venv .venv
     * .venv\Scripts\activate
-    * conda deactivate (as many times as requires, since is goes back to the conda environment used just before...)
 
-Once environment is created and packages installed: to create requirements.txt file on pure pip environment run:
+NOTE: in my case it was necessary to run it from inside conda (and in addition a specific one, not whichever one...). This is because our F4E administrators install python through conda and there's not PYTHONPATH to a bare (pure) python installation, so one has to first use the default python path given within a conda environment. After creation and activation of venv, conda shall be fully deactivated.
+
+Once environment is created and packages installed, to create requirements.txt file on pure pip environment run:
 * python -m pipreqs.pipreqs . --ignore ".venv"
 
 
