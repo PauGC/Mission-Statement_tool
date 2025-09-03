@@ -1,7 +1,7 @@
 import os
 # set environment variables to fix problem with easyocr
 # OMP: Error #15: Initializing libiomp5md.dll, but found libiomp5md.dll already initialized.
-os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+# os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 from babel.numbers import get_currency_symbol, get_territory_currencies
 from copy import deepcopy
 from datetime import datetime
