@@ -338,21 +338,21 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
             print("OCR successful and text recognized!!!")
             sys.stdout.flush()
             try:
-                im = Image.open(fp=attachment)  # .read())
-                im = im.convert('RGB')
-                im_size_pix = im.size
+                # im = Image.open(fp=attachment)  # .read())
+                # im = im.convert('RGB')
+                im_size_pix = img_small.size
                 inds = np.where(match_res)[0]
                 for ind in inds:
                     points = attachment_text[ind][0]
                     points.append(points[0])
                     points = [tuple(p) for p in points]
                     # im = Image.open("./resources/Lunch_25-03-2025.jfif")
-                    im2 = ImageDraw.Draw(im)
+                    im2 = ImageDraw.Draw(img_small)
                     for p0, p1 in pairwise(points):
                         im2.line([p0, p1], fill="red", width=2)
                 f = io.BytesIO()
                 f.name = attachment.name.replace(attachment.name.split(".")[-1], "jpeg")
-                im.save(fp=f, format="jpeg")
+                img_small.save(fp=f, format="jpeg")
                 attachment = f
             except Exception as err:
                 raise err
@@ -361,13 +361,13 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
             sys.stdout.flush()
             ocr_ok = False
             try:
-                im = Image.open(fp=attachment)
-                im = im.convert('RGB')
-                im_size_pix = im.size
+                # im = Image.open(fp=attachment)
+                # im = im.convert('RGB')
+                im_size_pix = img_small.size
                 inds = None
                 f = io.BytesIO()
                 f.name = attachment.name.replace(attachment.name.split(".")[-1], "jpeg")
-                im.save(fp=f, format="jpeg")
+                img_small.save(fp=f, format="jpeg")
                 attachment = f
             except Exception as err:
                 raise err
