@@ -4,7 +4,7 @@ Coming soon...
 
 
 
-## Cloud deploy notes:
+## Streamlit cloud deployment notes:
 
 ### Working with environments (how to)
 To create .yml file (from within the conda environment you want to export, of course): 
