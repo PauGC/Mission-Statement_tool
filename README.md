@@ -7,7 +7,7 @@ Coming soon...
 ## Cloud deploy notes:
 
 ### Creation of environments "how to"
-To create .yml file: 
+To create .yml file (from within the conda environment you want to export, of course): 
 ```
 conda env export > environment.yml
 ```
