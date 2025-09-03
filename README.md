@@ -20,10 +20,12 @@ python -m venv .venv
 
 **NOTE:** in my case it was necessary to run it from inside conda (and in addition a specific environment, not whichever one...). This is because our F4E administrators install python through conda and there's not PYTHONPATH to a bare (pure) python installation, so one has to first use the default python path given within a conda environment. After creation and activation of venv, conda shall be fully deactivated.
 
-Once environment is created and packages installed, to create requirements.txt file on pure pip environment run (pipreqs needs to be installed, but the point of exporting the requirements with --ignore ".venv" is that you just include the packages actually used in the code, not all the packages installed in your environment):
+Once environment is created and packages installed, to create requirements.txt file on pure pip environment run: 
 ```
 python -m pipreqs.pipreqs . --ignore ".venv"
 ```
+
+**NOTE:** ```pipreqs``` needs to be installed, but the point of exporting the requirements with ```--ignore ".venv"``` is that you just include the packages actually used in the code, not all the packages installed in your environment.
 
 ### Successful solution
 
