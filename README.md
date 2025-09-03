@@ -21,7 +21,9 @@ Once environment is created and packages installed: to create requirements.txt f
 
 ### Successful solution
 
-In the end the best solution has been to work with venv and install all packages with pip.
+In the end the best solution has been to work with venv and install all packages with pip and not use conda for anything (it does so much weird magic and ends up breaking things in non obvious ways).
+
+Python version is 3.13. Everything works fine with that both locally and on the cloud.
 
 The generated requirements.txt file looks like the following:
 
@@ -37,7 +39,7 @@ python_docx==1.2.0
 streamlit==1.49.1
 ```
 
-Additionally, a reduction of the receipt images to a size of roughly 200 MB before being processed with easyocr was necessary.
+Additionally, a reduction of the receipt images to a size of roughly 200 MB before being processed with easyocr was necessary to avoid easyocr.Reader to crash when recognizing text from the images.
 
 ### Environments tests
 
