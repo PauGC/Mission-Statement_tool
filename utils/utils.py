@@ -296,10 +296,12 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
     elif attachment.type.startswith("image"):
         print("Load reader...")
         sys.stdout.flush()
-        # try:
-        reader = easyocr.Reader(['en', 'es', 'fr', 'it', 'de'], gpu=False)
-        # except Exception as err:
-        #     raise err
+        try:
+            reader = easyocr.Reader(['en', 'es', 'fr', 'it', 'de'], gpu=False)
+        except Exception as err:
+            print(err)
+            sys.stdout.flush()
+            raise err
         print("Read text with OCR reader")
         # try:
         attachment_text = reader.readtext(attachment.read())
