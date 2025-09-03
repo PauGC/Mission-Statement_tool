@@ -20,7 +20,7 @@ python -m venv .venv
 
 **NOTE:** in my case it was necessary to run it from inside conda (and in addition a specific environment, not whichever one...). This is because our F4E administrators install python through conda and there's not PYTHONPATH to a bare (pure) python installation, so one has to first use the default python path given within a conda environment. After creation and activation of venv, conda shall be fully deactivated.
 
-Once environment is created and packages installed, to create requirements.txt file on pure pip environment run:
+Once environment is created and packages installed, to create requirements.txt file on pure pip environment run (pipreqs needs to be installed, but the point of exporting the requirements with --ignore ".venv" is that you just include the packages actually used in the code, not all the packages installed in your environment):
 ```
 python -m pipreqs.pipreqs . --ignore ".venv"
 ```
@@ -45,7 +45,7 @@ python_docx==1.2.0
 streamlit==1.49.1
 ```
 
-Additionally, a reduction of the receipt images to a size of roughly 200 MB before being processed with easyocr was necessary to avoid easyocr.Reader.readtext to crash when recognizing text from the images.
+Additionally, a reduction of the receipt images to a size of roughly 200 kB before being processed with easyocr was necessary to avoid easyocr.Reader.readtext to crash when recognizing text from the images.
 
 ### Environments tests
 
