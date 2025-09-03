@@ -6,7 +6,7 @@ Coming soon...
 
 ## Streamlit cloud deployment notes:
 
-### Working with environments (how to)
+### Working with environments
 To create .yml file (from within the conda environment you want to export, of course): 
 ```
 conda env export > environment.yml
