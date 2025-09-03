@@ -303,6 +303,7 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
             sys.stdout.flush()
             raise err
         print("Read text with OCR reader")
+        sys.stdout.flush()
         # try:
         attachment_text = reader.readtext(attachment.read())
         # except Exception as err:
@@ -316,6 +317,7 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
         if any(match_res):
             ocr_ok = True
             print("OCR successful and text recognized")
+            sys.stdout.flush()
             try:
                 im = Image.open(fp=attachment)  # .read())
                 im = im.convert('RGB')
@@ -337,6 +339,7 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
                 raise err
         else:
             print("OCR successful but text NOT recognized")
+            sys.stdout.flush()
             ocr_ok = False
             try:
                 im = Image.open(fp=attachment)

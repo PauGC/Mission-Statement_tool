@@ -14,8 +14,8 @@ To create venv:
     * .venv\Scripts\activate
     * conda deactivate (as many times as requires, since is goes back to the conda environment used just before...)
 
-Once environment is created and packages installed: to create requirements.txt file on pure pip environment run: 
-    * python -m pipreqs.pipreqs . --ignore ".venv"
+Once environment is created and packages installed: to create requirements.txt file on pure pip environment run:
+* python -m pipreqs.pipreqs . --ignore ".venv"
 
 ### Environments tests
 
