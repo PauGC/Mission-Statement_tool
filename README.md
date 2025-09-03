@@ -6,6 +6,7 @@ Coming soon...
 
 ## Cloud deploy notes:
 
+### Creation of environments "how to"
 To create .yml file: conda env export > environment.yml
 
 To create venv:
@@ -16,6 +17,27 @@ To create venv:
 
 Once environment is created and packages installed: to create requirements.txt file on pure pip environment run:
 * python -m pipreqs.pipreqs . --ignore ".venv"
+
+
+### Successful solution
+
+In the end the best solution has been to work with venv and install all packages with pip.
+
+The generated requirements.txt file looks like the following:
+
+```
+Babel==2.17.0
+easyocr==1.7.2
+numpy==2.3.2
+pandas==2.3.2
+Pillow==11.3.0
+pycountry==24.6.1
+pymupdf==1.26.4
+python_docx==1.2.0
+streamlit==1.49.1
+```
+
+Additionally, a reduction of the receipt images to a size of roughly 200 MB before being processed with easyocr was necessary.
 
 ### Environments tests
 
