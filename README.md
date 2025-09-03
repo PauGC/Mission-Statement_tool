@@ -8,7 +8,16 @@ Coming soon...
 
 To create .yml file: conda env export > environment.yml
 
-To create requirements.txt file on pure pip environment: python -m pipreqs.pipreqs . --ignore ".venv"
+To create venv:
+* from inside conda missionstatement run:
+    * python -m venv .venv
+    * .venv\Scripts\activate
+    * conda deactivate (as many times as requires, since is goes back to the conda environment used just before...)
+
+Once environment is created and packages installed: to create requirements.txt file on pure pip environment run: 
+    * python -m pipreqs.pipreqs . --ignore ".venv"
+
+### Environments tests
 
 1) missionstatement (python 3.13.4):
     * mixed conda and pip package installation 
