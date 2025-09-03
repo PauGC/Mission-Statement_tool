@@ -179,10 +179,6 @@ if __name__ == '__main__':
         st.session_state.mission_data = None
     if "kilometers_own_car" not in st.session_state:
         st.session_state.kilometers_own_car = {}
-    # if "mission_cancelled" not in st.session_state:
-    #     st.session_state.mission_cancelled = False
-    # if "mission_modified" not in st.session_state:
-    #     st.session_state.mission_modified = False
 
     # Configure layout of page, must be first streamlit call in script
     st.set_page_config(page_title="Mission Statement Tool", layout="wide", page_icon=":material/rocket_launch:")
@@ -352,33 +348,18 @@ if __name__ == '__main__':
         gen_btn = st.button("Check data and generate Mission Statement", icon=":material/description:")
         downloaded = False
         if gen_btn:
-            # with open("mission_request", 'wb') as outp:  # Overwrites any existing file.
-            #     pickle.dump(st.session_state.mission_request, outp, pickle.HIGHEST_PROTOCOL)
-            # with open("modified_mission_request", 'wb') as outp:  # Overwrites any existing file.
-            #     pickle.dump(st.session_state.modified_mission_request, outp, pickle.HIGHEST_PROTOCOL)
-            # with open("notification", 'wb') as outp:  # Overwrites any existing file.
-            #     pickle.dump(st.session_state.notification, outp, pickle.HIGHEST_PROTOCOL)
-            # with open("mission_data", 'wb') as outp:  # Overwrites any existing file.
-            #     pickle.dump(st.session_state.mission_data, outp, pickle.HIGHEST_PROTOCOL)
-            # with open("expenses", 'wb') as outp:  # Overwrites any existing file.
-            #     pickle.dump(st.session_state.expenses, outp, pickle.HIGHEST_PROTOCOL)
-            # with open("attachments", 'wb') as outp:  # Overwrites any existing file.
-            #     pickle.dump(st.session_state.attachments, outp, pickle.HIGHEST_PROTOCOL)
-            # with open("expense_summary", 'wb') as outp:  # Overwrites any existing file.
-            #     pickle.dump(st.session_state.expense_summary, outp, pickle.HIGHEST_PROTOCOL)
-
-            # try:
-            ms = generate_mission_statement()
-            # except Exception as err:
-            #     process_file_warning(err=err)
-            # else:
-            if ms:
-                st.write(f":green[Mission Statement generated succesfully!  \n"
-                        "You can now download the new document:]")
-                downloaded = st.download_button(label="Download file", 
-                                                data=ms.getvalue(), 
-                                                file_name=ms.name,
-                                                mime="docx",
-                                                icon=":material/download:")
+            try:
+                ms = generate_mission_statement()
+            except Exception as err:
+                process_file_warning(err=err)
+            else:
+                if ms:
+                    st.write(f":green[Mission Statement generated succesfully!  \n"
+                            "You can now download the new document:]")
+                    downloaded = st.download_button(label="Download file", 
+                                                    data=ms.getvalue(), 
+                                                    file_name=ms.name,
+                                                    mime="docx",
+                                                    icon=":material/download:")
         if downloaded:
             st.write("File downloaded!")
