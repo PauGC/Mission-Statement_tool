@@ -29,7 +29,7 @@ python -m pipreqs.pipreqs . --ignore ".venv"
 
 ### Successful solution
 
-In the end the best solution has been to work with ```venv``` and install all packages with ```python -m pip install package``` and not use conda for anything (it does so much weird magic and ends up breaking things in non obvious ways).
+In the end the best solution has been to work with ```venv``` and install all packages with ```python -m pip install package``` and not use conda for anything (it does so much weird magic and ends up breaking things in non obvious ways... it sucks so much!).
 
 Python version is 3.13. Everything works fine with that both locally and on the cloud.
 
