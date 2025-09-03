@@ -1,3 +1,4 @@
+python-docx
 babel
 easyocr
 numpy
@@ -5,5 +6,4 @@ pandas
 Pillow
 pycountry
 pymupdf
-python-docx
 streamlit
