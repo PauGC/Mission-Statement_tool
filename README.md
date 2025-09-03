@@ -7,6 +7,7 @@ Coming soon...
 ## Cloud deploy notes:
 
 To create .yml file: conda env export > environment.yml
+
 To create requirements.txt file on pure pip environment: python -m pipreqs.pipreqs . --ignore ".venv"
 
 1) missionstatement (python 3.13.4):
