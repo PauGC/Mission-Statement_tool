@@ -17,11 +17,11 @@ import pymupdf
 # from qrdet import QRDetector
 import re
 import streamlit as st
-# import torch
+import torch
 
 # avoid RunTime error raised by torch
 # RuntimeError: Tried to instantiate class '__path__._path', but it does not exist! Ensure that it is registered via torch::class_
-# torch.classes.__path__ = []
+torch.classes.__path__ = []
 
 BILLABLE_TRANSPORT = ["Own car", "Rental car", "Bus", "Metro", "Taxi", "Train", "Plane", "Ship"]
 
