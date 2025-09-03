@@ -55,8 +55,8 @@ Additionally, a reduction of the receipt images to a size of roughly 200 kB befo
     * mixed conda and pip package installation 
     * initial environment created while writing the code locally
         * locally: works fine after a number of fixes implemented while writing the code
-            - in app.py, utils\utils.py: os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
-            - in utils\utils.py: torch.classes.__path__ = []
+            - in app.py, utils\utils.py: ```os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"```
+            - in utils\utils.py: ```torch.classes.__path__ = []```
         * cloud:
             - environment.yml: when deploying it does not find python-docx
             - requirements.txt: 
