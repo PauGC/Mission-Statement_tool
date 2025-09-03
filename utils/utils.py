@@ -293,14 +293,16 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
     if attachment.type == "application/pdf":
         ocr_oks, attachments_new, im_size_cms, confidence_avgs = process_attachment_pdf(amount=amount, file=attachment)
     elif attachment.type.startswith("image"):
+        print("Load reader...")
         try:
             reader = easyocr.Reader(['en', 'es', 'fr', 'it', 'de'], gpu=False)
         except Exception as err:
             raise err
-        try:
-            attachment_text = reader.readtext(attachment.read())
-        except Exception as err:
-            raise err
+        print("Read text with OCR reader")
+        # try:
+        attachment_text = reader.readtext(attachment.read())
+        # except Exception as err:
+        #     raise err
         confidence_avg = np.mean([w[2] for w in attachment_text])
         if amount >= 1e3:
             amount_pattern = r".*({}\.{}\s?[,\.]\s?{}).*".format(int(amount / 1000), int(amount % 1000), "{:02d}".format(int(round(amount % 1, 2) * 100)))
@@ -309,6 +311,7 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
         match_res = [re.match(amount_pattern, w[1]) for w in attachment_text]
         if any(match_res):
             ocr_ok = True
+            print("OCR successful and text recognized")
             try:
                 im = Image.open(fp=attachment)  # .read())
                 im = im.convert('RGB')
@@ -326,9 +329,10 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
                 f.name = attachment.name.replace(attachment.name.split(".")[-1], "jpeg")
                 im.save(fp=f, format="jpeg")
                 attachment = f
-            except:
-                inds = None
+            except Exception as err:
+                raise err
         else:
+            print("OCR successful but text NOT recognized")
             ocr_ok = False
             try:
                 im = Image.open(fp=attachment)
@@ -339,8 +343,8 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
                 f.name = attachment.name.replace(attachment.name.split(".")[-1], "jpeg")
                 im.save(fp=f, format="jpeg")
                 attachment = f
-            except:
-                inds = None
+            except Exception as err:
+                raise err
         # estimate size: if amount is detected, size adjusted according to specific 
         # amount text, otherwise adjusted to average size of overall recognized text
         if im_size_pix:
