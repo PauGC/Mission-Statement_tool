@@ -294,6 +294,23 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
     if attachment.type == "application/pdf":
         ocr_oks, attachments_new, im_size_cms, confidence_avgs = process_attachment_pdf(amount=amount, file=attachment)
     elif attachment.type.startswith("image"):
+        # reduce image size to default:
+        print("Reduce image size...")
+        sys.stdout.flush()
+        img = Image.open(fp=attachment)
+        img = img.convert("RGB")
+        target_byte_count = 500000
+        target_pixel_count = 2.8114 * target_byte_count
+        scale_factor = target_pixel_count / (img.size[0] * img.size[1])
+        scale_factor = (1 if scale_factor > 1 else scale_factor)
+        sml_size = list([int(scale_factor * dim) for dim in img.size])
+        img_small = img.resize(sml_size, resample=Image.LANCZOS)
+        f = io.BytesIO()
+        f.name = attachment.name.replace(attachment.name.split(".")[-1], "jpeg")
+        img_small.save(fp=f, format="jpeg", optimize=True, quality=95)
+        # attachment = deepcopy(f)
+        # del f, img, img_small
+
         print("Load reader...")
         sys.stdout.flush()
         try:
@@ -302,12 +319,14 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
             print(err)
             sys.stdout.flush()
             raise err
-        print("Read text with OCR reader")
+        print("Read text with OCR reader...")
         sys.stdout.flush()
-        # try:
-        attachment_text = reader.readtext(attachment.read())
-        # except Exception as err:
-        #     raise err
+        try:
+            attachment_text = reader.readtext(f.getvalue())  # attachment.read())
+        except Exception as err:
+            print(err)
+            sys.stdout.flush()
+            raise err
         confidence_avg = np.mean([w[2] for w in attachment_text])
         if amount >= 1e3:
             amount_pattern = r".*({}\.{}\s?[,\.]\s?{}).*".format(int(amount / 1000), int(amount % 1000), "{:02d}".format(int(round(amount % 1, 2) * 100)))
@@ -316,7 +335,7 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
         match_res = [re.match(amount_pattern, w[1]) for w in attachment_text]
         if any(match_res):
             ocr_ok = True
-            print("OCR successful and text recognized")
+            print("OCR successful and text recognized!!!")
             sys.stdout.flush()
             try:
                 im = Image.open(fp=attachment)  # .read())
@@ -338,7 +357,7 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
             except Exception as err:
                 raise err
         else:
-            print("OCR successful but text NOT recognized")
+            print("OCR successful but text NOT recognized.")
             sys.stdout.flush()
             ocr_ok = False
             try:
