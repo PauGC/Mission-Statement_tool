@@ -309,7 +309,7 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
         f.name = attachment.name.replace(attachment.name.split(".")[-1], "jpeg")
         img_small.save(fp=f, format="jpeg", optimize=True, quality=95)
         # attachment = deepcopy(f)
-        # del f, img, img_small
+        del img
 
         print("Load reader...")
         sys.stdout.flush()
