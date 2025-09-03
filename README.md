@@ -7,6 +7,7 @@ Coming soon...
 ## Cloud deploy notes:
 
 To create .yml file: conda env export > environment.yml
+To create requirements.txt file on pure pip environment: python -m pipreqs.pipreqs . --ignore ".venv"
 
 1) missionstatement (python 3.13.4):
     * mixed conda and pip package installation 
@@ -18,7 +19,7 @@ To create .yml file: conda env export > environment.yml
             - environment.yml: when deploying it does not find python-docx
             - requirements.txt: 
                 - when placing python-docx first, no problems with python-docx
-                - app crashes when loading easyocr model (easyocr.reader)
+                - app crashes when loading easyocr model (easyocr.Reader)
 
 2) missionstatement_py311 (python 3.11.13): 
     * pure conda installation: I don't manage to complete the creation of the environment
