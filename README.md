@@ -45,7 +45,7 @@ python_docx==1.2.0
 streamlit==1.49.1
 ```
 
-Additionally, a reduction of the receipt images to a size of roughly 200 MB before being processed with easyocr was necessary to avoid easyocr.Reader to crash when recognizing text from the images.
+Additionally, a reduction of the receipt images to a size of roughly 200 MB before being processed with easyocr was necessary to avoid easyocr.Reader.readtext to crash when recognizing text from the images.
 
 ### Environments tests
 
