@@ -7,16 +7,27 @@ Coming soon...
 Cloud deploy notes:
 To create .yml file: conda env export > environment.yml
 1) missionstatement (python 3.13.4):
-    * initial environment created using conda and pip alternatively while writing the code in local
-    * a number of fixes implemented on the fly (dirty)
-    * when deploying it does not find python-docx
+    * mixed conda and pip package installation 
+    * initial environment created while writing the code locally
+        * locally: works fine after a number of fixes implemented while writing the code
+            * in app.py, utils\utils.py: os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+            * in utils\utils.py: torch.classes.__path__ = []
+        * cloud:
+            * when deploying it does not find python-docx
 
 2) missionstatement_py311 (python 3.11.13): 
-    * try package installation with conda only: I don't manage to complete the creation of the environment
+    * pure conda installation: I don't manage to complete the creation of the environment
         * pymupdf cannot be installed wihtout conflicting with easyocr
         * easyocr installed version by default 7.1.0, which has problems with Pillow ANTIALIAS
 
 3) missionstatement_py313 (python 3.13.5):
-    * try package installation with pip only:
-        * app crashed when processing receipt images
-        * processing of receipts in pdf works fine
+    * conda env with only pip installation:
+        * locally:
+            * app crashed when processing receipt images (easyocr, Pillow?!?!?!)
+            * processing of receipts in pdf works fine
+        * cloud:
+            * does not find python-docx...
+
+4) missionstatement_py312 (python 3.12.11):
+    * conda env with only pip installation:
+        
