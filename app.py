@@ -4,6 +4,7 @@ import os
 # os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 from copy import deepcopy
 import numpy as np
+import easyocr
 import pandas as pd
 import streamlit as st
 
@@ -179,6 +180,8 @@ if __name__ == '__main__':
         st.session_state.mission_data = None
     if "kilometers_own_car" not in st.session_state:
         st.session_state.kilometers_own_car = {}
+    if "ocr_reader" not in st.session_state:
+        st.session_state.ocr_reader = easyocr.Reader(['en', 'es', 'fr', 'it', 'de'], gpu=False)
 
     # Configure layout of page, must be first streamlit call in script
     st.set_page_config(page_title="Mission Statement Tool", layout="wide", page_icon=":material/rocket_launch:")
