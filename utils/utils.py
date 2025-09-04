@@ -295,12 +295,13 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
         ocr_oks, attachments_new, im_size_cms, confidence_avgs = process_attachment_pdf(amount=amount, file=attachment)
     elif attachment.type.startswith("image"):
         # reduce image size to default:
+        # Source: https://stackoverflow.com/questions/73178152/is-it-possible-to-compress-image-size-without-specifying-the-quality
         print("Reduce image size...")
         sys.stdout.flush()
         img = Image.open(fp=attachment)
         img = img.convert("RGB")
         target_byte_count = 500000
-        target_pixel_count = 2.8114 * target_byte_count
+        target_pixel_count = 2.8114 * target_byte_count   # 2.8114 is the magic number
         scale_factor = target_pixel_count / (img.size[0] * img.size[1])
         scale_factor = (1 if scale_factor > 1 else scale_factor)
         sml_size = list([int(scale_factor * dim) for dim in img.size])
@@ -355,6 +356,8 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
                 img_small.save(fp=f, format="jpeg")
                 attachment = f
             except Exception as err:
+                print(err)
+                sys.stdout.flush()
                 raise err
         else:
             print("OCR successful but text NOT recognized.")
@@ -365,11 +368,13 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
                 # im = im.convert('RGB')
                 im_size_pix = img_small.size
                 inds = None
-                f = io.BytesIO()
-                f.name = attachment.name.replace(attachment.name.split(".")[-1], "jpeg")
-                img_small.save(fp=f, format="jpeg")
+                # f = io.BytesIO()
+                # f.name = attachment.name.replace(attachment.name.split(".")[-1], "jpeg")
+                # img_small.save(fp=f, format="jpeg")
                 attachment = f
             except Exception as err:
+                print(err)
+                sys.stdout.flush()
                 raise err
         # estimate size: if amount is detected, size adjusted according to specific 
         # amount text, otherwise adjusted to average size of overall recognized text
