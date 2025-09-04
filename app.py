@@ -217,6 +217,12 @@ if __name__ == '__main__':
                                     st.session_state.expenses = pd.DataFrame(columns=["Category", "Description", "Paid amount", "Currency", "Exchange rate", "Paid amount (EUR)", "Attachments"])
                 except:
                     mission_data = None
+
+                # I think this needs to be updated:
+                # >>> if st.session_state.mission_modified:
+                # >>>       st.session_state.mission_data = mission_data
+                # BUT if the toggle of "modified mission request" is not True, the eomployee shall be able to upload a new document (in case 
+                # he uploaded the wrong one the first time).
                 if st.session_state.mission_data is None:
                     st.session_state.mission_data = mission_data
                 miss_req_imgs = convert_pdf2image(file=miss_req)
