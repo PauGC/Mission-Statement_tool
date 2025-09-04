@@ -315,7 +315,10 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
         print("Load reader...")
         sys.stdout.flush()
         try:
-            reader = easyocr.Reader(['en', 'es', 'fr', 'it', 'de'], gpu=False)
+            if "ocr_reader" in st.session_state:
+                reader = st.session_state.ocr_reader
+            else:
+                reader = easyocr.Reader(['en', 'es', 'fr', 'it', 'de'], gpu=False)
         except Exception as err:
             print(err)
             sys.stdout.flush()
