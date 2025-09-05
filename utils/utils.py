@@ -296,8 +296,6 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
     elif attachment.type.startswith("image"):
         # reduce image size to default:
         # Source: https://stackoverflow.com/questions/73178152/is-it-possible-to-compress-image-size-without-specifying-the-quality
-        print("Reduce image size...")
-        sys.stdout.flush()
         img = Image.open(fp=attachment)
         img = img.convert("RGB")
         target_byte_count = 500000
@@ -312,21 +310,8 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
         # attachment = deepcopy(f)
         del img
 
-        print("Load reader...")
-        sys.stdout.flush()
         try:
-            if "ocr_reader" in st.session_state:
-                reader = st.session_state.ocr_reader
-            else:
-                reader = easyocr.Reader(['en', 'es', 'fr', 'it', 'de'], gpu=False)
-        except Exception as err:
-            print(err)
-            sys.stdout.flush()
-            raise err
-        print("Read text with OCR reader...")
-        sys.stdout.flush()
-        try:
-            attachment_text = reader.readtext(f.getvalue())  # attachment.read())
+            attachment_text = st.session_state.ocr_reader.readtext(f.getvalue())  # attachment.read())
         except Exception as err:
             print(err)
             sys.stdout.flush()
@@ -339,8 +324,6 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
         match_res = [re.match(amount_pattern, w[1]) for w in attachment_text]
         if any(match_res):
             ocr_ok = True
-            print("OCR successful and text recognized!!!")
-            sys.stdout.flush()
             try:
                 # im = Image.open(fp=attachment)  # .read())
                 # im = im.convert('RGB')
@@ -363,8 +346,6 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
                 sys.stdout.flush()
                 raise err
         else:
-            print("OCR successful but text NOT recognized.")
-            sys.stdout.flush()
             ocr_ok = False
             try:
                 # im = Image.open(fp=attachment)
@@ -391,7 +372,7 @@ def check_attachment(category: str, amount: float, attachment: io.BytesIO):  #, 
         im_size_cms = [im_size_cm]
         confidence_avgs = [confidence_avg]
     else:
-        raise TypeError("Unrecognized file type")
+        raise TypeError("Unrecognized file format of receipt {}.".format(attachment.name))
     # print(ocr_oks, attachments_new, im_size_cms, confidence_avgs)
     return ocr_oks, attachments_new, im_size_cms, confidence_avgs
 
